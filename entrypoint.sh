@@ -7,11 +7,16 @@ until nc -z $DATABASE_HOST 5432; do
   sleep 2
 done
 
-echo "Creando la base de datos (si es necesario)..."
-bundle exec rails db:create || echo "La base de datos ya existe."
+# Si el comando incluye 'sidekiq', salta las migraciones
+if [[ "$@" =~ "sidekiq" ]]; then
+  echo "Iniciando Sidekiq sin ejecutar migraciones..."
+else
+  echo "Creando la base de datos (si es necesario)..."
+  bundle exec rails db:create || echo "La base de datos ya existe."
 
-echo "Aplicando migraciones..."
-bundle exec rails db:migrate
+  echo "Aplicando migraciones..."
+  bundle exec rails db:migrate
+fi
 
 echo "Iniciando la aplicación..."
 exec "$@"
