@@ -2,9 +2,9 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
-  username: <%= ENV['DATABASE_USERNAME'] || 'postgres' %>
-  password: <%= ENV['DATABASE_PASSWORD'] || '' %>
+  host: <%= ENV.fetch("DATABASE_HOST") %>
+  username: <%= ENV.fetch("DATABASE_USERNAME") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
 
 development:
   <<: *default
@@ -17,3 +17,5 @@ test:
 production:
   <<: *default
   database: waypoint_api_production
+  username: <%= ENV.fetch("DATABASE_USERNAME") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
