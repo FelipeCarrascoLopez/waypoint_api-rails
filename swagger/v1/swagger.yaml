@@ -39,8 +39,38 @@ paths:
               - longitude
               - sent_at
               - vehicle_identifier
+    get:
+      summary: List the latest GPS waypoints for all vehicles
+      tags:
+      - GPS
+      responses:
+        '200':
+          description: List of latest waypoints for all vehicles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    vehicle_identifier:
+                      type: string
+                      example: HA-3452
+                    latitude:
+                      type: number
+                      example: 20.23
+                    longitude:
+                      type: number
+                      example: -0.56
+                    timestamp:
+                      type: string
+                      format: date_time
+                      example: '2016-06-02T20:45:00Z'
+                  required:
+                  - vehicle_identifier
+                  - latitude
+                  - longitude
+                  - timestamp
 servers:
 - url: http://localhost:3000
-  variables:
-    defaultHost:
-      default: http://localhost:3000
+  variables: {}

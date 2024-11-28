@@ -2,6 +2,7 @@ require 'swagger_helper'
 
 RSpec.describe 'API::V1::Gps', type: :request do
   path '/api/v1/gps' do
+    # Documentación para POST /api/v1/gps
     post 'Create a GPS waypoint' do
       tags 'GPS'
       consumes 'application/json'
@@ -30,6 +31,27 @@ RSpec.describe 'API::V1::Gps', type: :request do
 
       response '422', 'Validation errors' do
         let(:payload) { {} }
+        run_test!
+      end
+    end
+
+    # Documentación para GET /api/v1/gps
+    get 'List the latest GPS waypoints for all vehicles' do
+      tags 'GPS'
+      produces 'application/json'
+
+      response '200', 'List of latest waypoints for all vehicles' do
+        schema type: :array, items: {
+          type: :object,
+          properties: {
+            vehicle_identifier: { type: :string, example: 'HA-3452' },
+            latitude: { type: :number, example: 20.23 },
+            longitude: { type: :number, example: -0.56 },
+            timestamp: { type: :string, format: :date_time, example: '2016-06-02T20:45:00Z' }
+          },
+          required: %w[vehicle_identifier latitude longitude timestamp]
+        }
+
         run_test!
       end
     end
