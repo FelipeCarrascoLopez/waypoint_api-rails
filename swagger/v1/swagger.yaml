@@ -14,7 +14,7 @@ paths:
         '201':
           description: Waypoint created successfully
         '422':
-          description: Validation errors
+          description: Validation errorsf
       requestBody:
         content:
           application/json:
@@ -27,10 +27,6 @@ paths:
                 longitude:
                   type: number
                   example: -0.56
-                sent_at:
-                  type: string
-                  format: date_time
-                  example: '2016-06-02T20:45:00Z'
                 vehicle_identifier:
                   type: string
                   example: HA-3452

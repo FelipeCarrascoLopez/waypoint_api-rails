@@ -11,22 +11,40 @@ RSpec.describe 'API::V1::Gps', type: :request do
         properties: {
           latitude: { type: :number, example: 20.23 },
           longitude: { type: :number, example: -0.56 },
-          sent_at: { type: :string, format: :date_time, example: '2016-06-02T20:45:00Z' },
+          sent_at: { type: :string, format: :date_time, example: '2024-12-02T20:45:00Z' },
           vehicle_identifier: { type: :string, example: 'HA-3452' }
         },
-        required: %w[latitude longitude sent_at vehicle_identifier]
+        required: %w[latitude longitude vehicle_identifier]
       }
 
-      response '201', 'Waypoint created successfully' do
+      response '201', 'Waypoint created successfully with sent_at provided' do
         let(:payload) do
           {
             latitude: 20.23,
             longitude: -0.56,
-            sent_at: '2016-06-02T20:45:00Z',
+            sent_at: '2024-12-02T20:45:00Z',
             vehicle_identifier: 'HA-3452'
           }
         end
         run_test!
+      end
+
+      response '201', 'Waypoint created successfully with sent_at automatically set' do
+        let(:payload) do
+          {
+            latitude: 20.23,
+            longitude: -0.56,
+            vehicle_identifier: 'HA-3452'
+          }
+        end
+
+        it 'sets sent_at to the current timestamp if not provided' do
+          freeze_time do
+            run_test!
+            waypoint = Waypoint.last
+            expect(waypoint.timestamp).to eq(Time.now.utc)
+          end
+        end
       end
 
       response '422', 'Validation errors' do
@@ -47,7 +65,7 @@ RSpec.describe 'API::V1::Gps', type: :request do
             vehicle_identifier: { type: :string, example: 'HA-3452' },
             latitude: { type: :number, example: 20.23 },
             longitude: { type: :number, example: -0.56 },
-            timestamp: { type: :string, format: :date_time, example: '2016-06-02T20:45:00Z' }
+            timestamp: { type: :string, format: :date_time, example: '2024-12-02T20:45:00Z' }
           },
           required: %w[vehicle_identifier latitude longitude timestamp]
         }
