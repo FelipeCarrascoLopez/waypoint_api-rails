@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* .env
 
-Things you may want to cover:
+* POSTGRES_USER = postgresql
+* POSTGRES_PASSWORD = postgresql
+* POSTGRES_USER = postgresql
+* POSTGRES_PASSWORD = postgresql
+* POSTGRES_HOST = db
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
