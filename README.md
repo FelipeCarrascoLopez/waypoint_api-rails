@@ -11,4 +11,4 @@ POSTGRES_HOST=db
 
 swagger
 
-[localhost._](http://localhost:3000/api-docs/)
+http://localhost:3000/api-docs/
