@@ -1,42 +1,67 @@
-# README
+# Requisitos
 
-# Requisitos: 
+### Linux
+- Tener instalado:
+  - Docker
+  - Git
 
-Linux: Tener Instalado docker y git
-Windows: debes tener instalado WSL con alguna distro a eleccion,  git y ademas docker desktop
+### Windows
+- Tener instalado:
+  - WSL con una distribución de Linux a elección.
+  - Git
+  - Docker Desktop
+
+---
+
+## 1. Clonar el Proyecto y Entrar al Directorio
+
+Ejecuta los siguientes comandos en tu terminal:
+
+git clone https://github.com/FelipeCarrascoLopez/waypoint_api-rails.git cd waypoint_api-rails
 
 
-## 1 - Clonar Proyecto y entrar al directorio
+---
 
-git clone https://github.com/FelipeCarrascoLopez/waypoint_api-rails.git
+## 2. Configuración del Entorno
 
-cd waypoint_api-rails
+1. Crear un archivo `.env` en el directorio raíz del proyecto con las siguientes variables de entorno:
+
+POSTGRES_USER=postgresql POSTGRES_PASSWORD=postgresql POSTGRES_HOST=db
 
 
-## 1 - Configuración del Entorno
-
-Crear un archivo `.env` en el directorio raíz del proyecto con las siguientes variables de entorno:
-
-POSTGRES_USER=postgresql
-POSTGRES_PASSWORD=postgresql
-POSTGRES_HOST=db
-
-despues crear el archivo .env con:
+2. Crear el archivo `.env`:
 
 touch .env
 
-abrir archivo (ctrl + x, despues enter para guardar:
+
+3. Abrir y editar el archivo con el comando:
+
 nano .env
 
-Comprobar los datos:
+- Guardar y salir: Presiona `Ctrl + X`, luego `Enter`.
+
+4. Comprobar que los datos se guardaron correctamente:
+
 cat .env
 
-## 2 - Leventar servicios con docker
 
-con este comando creamos y levantamos los servicios del contenedor a partir del docker-compose.yml
+---
+
+## 3. Levantar Servicios con Docker
+
+1. Crear y levantar los servicios del contenedor utilizando el archivo `docker-compose.yml`:
 
 docker compose up --build
 
-api con swagger: http://localhost:3000/api-docs/
 
-![image](https://github.com/user-attachments/assets/481fe5f7-14b8-47c1-800a-fddbe6c8092c)
+
+2. Una vez iniciados los servicios, la API estará disponible con Swagger en:  
+[http://localhost:3000/api-docs/](http://localhost:3000/api-docs/)
+
+---
+
+## Vista de Ejemplo
+![Vista de Swagger](https://github.com/user-attachments/assets/481fe5f7-14b8-47c1-800a-fddbe6c8092c)
+
+
+
