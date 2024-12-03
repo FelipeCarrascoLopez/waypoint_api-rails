@@ -17,7 +17,8 @@
 
 Ejecuta los siguientes comandos en tu terminal:
 
-git clone https://github.com/FelipeCarrascoLopez/waypoint_api-rails.git cd waypoint_api-rails
+- git clone https://github.com/FelipeCarrascoLopez/waypoint_api-rails.git 
+- cd waypoint_api-rails
 
 
 ---
