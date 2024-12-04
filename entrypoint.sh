@@ -33,5 +33,10 @@ else
   fi
 fi
 
+if [ -f /app/tmp/pids/server.pid ]; then
+  echo "Eliminando archivo server.pid..."
+  rm /app/tmp/pids/server.pid
+fi
+
 echo "Iniciando la aplicación..."
 exec "$@"
