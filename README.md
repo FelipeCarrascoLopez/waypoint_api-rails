@@ -59,6 +59,11 @@ docker compose up --build
 2. Una vez iniciados los servicios, la API estará disponible con Swagger en:  
 [http://localhost:3000/api-docs/](http://localhost:3000/api-docs/)
 
+3. Sidekiq
+
+
+http://localhost:3000/sidekiq
+
 ---
 
 ## Vista de Ejemplo
