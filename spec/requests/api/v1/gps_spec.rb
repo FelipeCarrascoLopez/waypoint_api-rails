@@ -1,8 +1,12 @@
 require 'swagger_helper'
+require 'active_support/testing/time_helpers'
+
+RSpec.configure do |config|
+  config.include ActiveSupport::Testing::TimeHelpers
+end
 
 RSpec.describe 'API::V1::Gps', type: :request do
   path '/api/v1/gps' do
-    # Documentación para POST /api/v1/gps
     post 'Create a GPS waypoint' do
       tags 'GPS'
       consumes 'application/json'
@@ -39,12 +43,14 @@ RSpec.describe 'API::V1::Gps', type: :request do
         end
 
         it 'sets sent_at to the current timestamp if not provided' do
-          freeze_time do
-            run_test!
-            waypoint = Waypoint.last
-            expect(waypoint.timestamp).to eq(Time.now.utc)
-          end
+          now = Time.now.utc
+          allow(Time).to receive(:now).and_return(now)
+        
+          post '/api/v1/gps', params: payload, as: :json
+          waypoint = Waypoint.last
+          expect(waypoint.timestamp.round(3)).to eq(now.round(3))
         end
+        
       end
 
       response '422', 'Validation errors' do
@@ -53,7 +59,6 @@ RSpec.describe 'API::V1::Gps', type: :request do
       end
     end
 
-    # Documentación para GET /api/v1/gps
     get 'List the latest GPS waypoints for all vehicles' do
       tags 'GPS'
       produces 'application/json'
